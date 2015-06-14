@@ -1,0 +1,21 @@
+*, *::after, *::before{
+  box-sizing:border-box;
+}
+
+.cf::after{
+  content:'';
+  display:block;
+  clear:both;
+}
+
+body{
+  padding:1em 3em;
+  font-family:sans-serif;
+  margin:auto;
+}
+
+.one-third{
+  float:left;
+  width:33.33%;
+  border:1px solid #fff;
+}

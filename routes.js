@@ -1,26 +1,37 @@
+var request = require("request")
 var Routes = function(app){
-  app.get("/", this.get)
-  app.post("/", this.post)
-  app.patch("/", this.patch)
-  app.delete("/", this.delete)
-  app.put("/", this.put)
+  app.all("/", this.ricochet.bind(this))
 }
 
 Routes.prototype = {
-  get: function(req,res){
-    res.send("got!")       
+  ricochet: function( req, res ){
+    if(req.method == "GET" && !req.query.method){
+      res.render("index")
+    } else if(this.validate(req,res)){
+      var form = req.query
+      var options = {
+        uri: req.query.uri, 
+	method: req.query.method
+      }
+      delete form.method
+      delete form.uri
+      options.form = form
+
+      request( options ,function(err,body,response){
+	res.send(response)
+      })
+    } 
   },
-  post: function(req,res){
-    res.send("posted!")       
-  },
-  patch: function(req,res){
-    res.send("patched!")       
-  },
-  put: function(req,res){
-    res.send("put!")       
-  },
-  delete: function(req,res){
-    res.send("deleted!")       
+  validate: function(req, res, next){
+    if(!req.query.method){
+      res.send({error:"Missing method"})
+      return false
+    }
+    if(!req.query.uri){
+      res.send({error:"Missing uri"})
+      return false
+    }
+    return true
   }
 }
 
