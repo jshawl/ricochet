@@ -3,17 +3,13 @@
 
 <h2>Example</h2>
 
-
 <div class="">
-  <h3>Sent</h3>
-  <h4><pre>GET http://ricochet.link/?method=post&uri=http://reqr.es/api/users
-</div>
-<div class="">
-  <h3>Sent from Ricochet</h3>
-  <h4><pre>POST http://reqr.es/api/users</pre></h4>
-
-  
-</div>
-<div class="">
-  <h3>Got from server</h3>
+  <h3><pre>GET <a href='http://ricochet.link/?method=post&name=jesse&age=26&uri=http://reqr.es/api/users'>http://ricochet.link/?method=post&name=jesse&age=26&uri=http://reqr.es/api/users</a></pre></h3>
+  Will make a POST request to http://reqr.es/api/users with these form parameters:
+<pre>
+{
+  name: "jesse",
+  age: 26
+}
+</pre>
 </div>
